@@ -1,0 +1,7 @@
+- debug:
+    msg: Service with import role
+
+- import_role:
+    name: puzan_service
+  vars:
+    puzan_service_name: service_with_import_role

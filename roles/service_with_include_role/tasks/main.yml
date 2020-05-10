@@ -1,0 +1,8 @@
+- debug:
+    msg: Service with include role
+
+- include_role:
+    name: puzan_service
+    public: no
+  vars:
+    puzan_service_name: service_with_include_role

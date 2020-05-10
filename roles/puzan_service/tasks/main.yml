@@ -1,0 +1,9 @@
+- assert:
+    that:
+      - puzan_service_name is string
+      - puzan_service_name | length > 0
+    fail_msg: puzan_service_name should be defined
+
+- name: print puzan_service_name
+  debug:
+    var: puzan_service_name

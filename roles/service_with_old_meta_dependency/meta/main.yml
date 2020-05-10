@@ -1,0 +1,3 @@
+dependencies:
+  - role: puzan_service
+    puzan_service_name: service_with_old_meta_dependency

@@ -1,0 +1,101 @@
+- name: Play with old vars definition
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+  roles:
+    - role: puzan_service
+      puzan_service_name: some
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+
+- name: Play with vars definition
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+      ignore_errors: yes
+  roles:
+    - role: puzan_service
+      vars:
+        puzan_service_name: some
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+      ignore_errors: yes
+
+- name: Play with old meta dependency
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+  roles:
+    - role: service_with_old_meta_dependency
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+
+- name: Play with meta dependency
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+      ignore_errors: yes
+  roles:
+    - role: service_with_meta_dependency
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name == None
+      ignore_errors: yes
+
+- name: Play with include_role
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name is not defined
+  roles:
+    - role: service_with_include_role
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name is not defined
+
+- name: Play with public include_role
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name is not defined
+      ignore_errors: yes
+  roles:
+    - role: service_with_public_include_role
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name is defined
+      ignore_errors: yes
+
+- name: Play with import_role
+  hosts: localhost
+  pre_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name is not defined
+      ignore_errors: yes
+  roles:
+    - role: service_with_import_role
+  post_tasks:
+    - debug: var=puzan_service_name
+    - assert:
+        that: puzan_service_name is not defined
+      ignore_errors: yes

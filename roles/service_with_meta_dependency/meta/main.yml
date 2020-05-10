@@ -1,0 +1,4 @@
+dependencies:
+  - role: puzan_service
+    vars:
+      puzan_service_name: service_with_meta_dependency
